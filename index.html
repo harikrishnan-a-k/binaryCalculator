@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 33%;
+        }
+        #res{
+            height:48px;
+            font-size: 20px;
+            background-color: lightgray;
+            border: 4px solid black;
+
+        }
+        button{
+            width: 25%;
+            height: 36px;
+            font-size: 18px;
+            margin:0px;
+            float: left;
+        }
+        #btn0,#btn1{
+            color: brown;
+            background-color: lightgreen;
+            
+        }
+        #btnClr,#btnEql{
+            color:white;
+            background-color: darkgreen;
+
+        }
+        #btnSum,#btnSub,#btnMul,#btnDiv{
+            color:red;
+            background-color: black;
+
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="res">
+    </div>
+    <div id="btns">
+        <button id="btn0">0</button>
+        <button id="btn1">1</button>
+        <button id="btnClr">C</button>
+        <button id="btnEql">=</button>
+        <button id="btnSum">+</button>
+        <button id="btnSub">-</button>
+        <button id="btnMul">*</button>
+        <button id="btnDiv">/</button>
+    </div>
+
+
+
+
+   
+    <script>
+
+        function clearRes(){
+            document.querySelector('#res').innerText='';
+        }
+        function setValue(val){
+            document.querySelector('#res').innerText+=val;
+        }
+        function evaluate(){
+            let input= document.querySelector('#res').innerText;
+            let operands=input.match(/[01]+/g);
+            let [b1,b2]=operands;
+            num1=parseInt(b1,2);
+            num2=parseInt(b2,2);
+            let operator=input.match(/[\+\-\*\/]/)[0];
+            let ans=parseInt(eval(num1+operator+num2));
+            document.querySelector('#res').innerText=ans.toString(2);
+        }
+  document.querySelectorAll('button').forEach(function(button){
+      button.addEventListener('click',function(e){
+          let val=e.target.innerText;
+          console.log(val);
+          switch(val){
+                case 'C':clearRes();
+                        break;
+                case '=': evaluate();
+                            break;
+                default: setValue(val);
+          }
+      })
+  })      
+        
+    
+    </script>
+</body>
+</html>
